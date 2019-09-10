@@ -9,7 +9,7 @@ import Search from "./models/Search.js";
 
 const state = {};
 
-const controlSearch = () => {
+const controlSearch = async () => {
 	// 1 .Get query from View.
 	const query = 'Beef' //this is a place holder ..this will be in the "View"
 
@@ -22,7 +22,10 @@ const controlSearch = () => {
 
 
 	//4. search for recipes.
-	search.getResults();
+	await state.search.getResults();
+
+	//5. log the results ( show recipes (render results to View))
+	console.log(state.search.recipes)
 
 }
 
