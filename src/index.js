@@ -1,4 +1,7 @@
 import Search from "./models/Search.js";
+import * as searchView from "./view/searchView.js";
+import { elements } from "./view/base.js";
+
 
 /**Global state of the app
 * - Search Object
@@ -11,13 +14,13 @@ const state = {};
 
 const controlSearch = async () => {
 	// 1 .Get query from View.
-	const query = 'Beef' //this is a place holder ..this will be in the "View"
+	const query = searchView.getInput(); //this is a place holder ..this will be in the "View"
 
 	//2 create new search object.
 	if (query) {
 		state.search = new Search(query);
 	}
-
+	console.log(state.search);
 	//3 prepare user interface for what is about to happen(i.e clear previous results, and show 'loading' spinner).
 
 
@@ -25,11 +28,11 @@ const controlSearch = async () => {
 	await state.search.getResults();
 
 	//5. log the results ( show recipes (render results to View))
-	console.log(state.search.recipes)
+	console.log(state.search.recipes);  
 
 }
 
-document.querySelector('.search').addEventListener('click', event => {
+elements.searchForm.addEventListener('submit', event => {
 	event.preventDefault();
 	controlSearch();
 
