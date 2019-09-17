@@ -20,22 +20,28 @@ const controlSearch = async () => {
 	if (query) {
 		state.search = new Search(query);
 	}
-	console.log(state.search);
 	//3 prepare user interface for what is about to happen(i.e clear previous results, and show 'loading' spinner).
 
+	// Clear Recipe Results;
+		// Clear input field
+	searchView.clearInput();
+	searchView.clearRecipeResults();
 
 	//4. search for recipes.
 	await state.search.getResults();
 
-	//5. log the results ( show recipes (render results to View))
-	console.log(state.search.recipes);  
+	//5. Render results to View
+	//console.log(state.search.recipes);
+	
+	searchView.renderResults(state.search.recipes); 
 
 }
 
 elements.searchForm.addEventListener('submit', event => {
 	event.preventDefault();
 	controlSearch();
-
 })
+
+
 
 
